@@ -1,0 +1,206 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+        * {
+            font-family: Arial, "Free Sans";
+        }
+        body {
+            background: #fff url("circles.png") repeat right top;
+        }
+        #container {
+            margin: 0 auto;
+            text-align: center;
+        }
+        #dimcontainer {
+            padding: 2px;
+            margin: 0 auto;
+            left: 500px;
+        }
+        .boxnum {
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid #e3e3e3;
+            background: #fff;
+            width: 70px;
+            height: 70px;
+            margin: 2px;
+            float: left;
+            color: #D80000;
+            -webkit-border-radius: .3em;
+            -moz-border-radius: .3em;
+            border-radius: .3em;
+        }
+        .boxnum:hover {
+            background: #e3e3e3;
+        }
+		.active{
+			background: red !important;
+		}
+		.success{
+			background: gray !important;
+		}
+		.success p{
+			color:#fff;
+		}
+		
+        .boxnum p {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: -1px 1px 1px #fff;
+        }
+        .red {
+            background: #ff0000;
+            border-color: #ff0000;
+        }
+        .red:hover {
+            background: #ff0000 !important;
+        }
+        #boxclear {
+            clear: both;
+        }
+        #pnext {
+            font-size: 18px;
+        }
+        #nextsum { 
+            font-weight: bold;
+            font-size: 30px;
+            position: relative;
+            top: 3px;
+            color: black;
+        }
+        #pick {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+	<div id="container">
+        <div id="pick">
+            Pick Dimension: &nbsp;
+            <select id="cbdim" style="font-size:18px;">
+                <option value="3">3 x 3</option>
+                <option value="4">4 x 4</option>
+                <option value="5">5 x 5</option>
+                <option value="6">6 x 6</option>
+                <option value="7">7 x 7</option>
+            </select>
+            <button id="btnstart" onclick="start();">Start Game !</button>
+        </div>
+        <p id="pnext">Next Total: &nbsp;<span id="nextsum">0</span></p>
+
+        <div id="dimcontainer">
+            <div id="boxclear" style="clear:both"></div>
+        </div>
+    </div>
+    
+    <script src="jquery-1.9.1.js"></script>
+<script>
+    //用来存放数值的数组
+    var numbers=new Array();
+    var arrays1=new Array();
+    var indexRan=0;  //随机取得索引
+    var totalnum=0;
+    function start(){
+        //1，获取你选择的option的val
+       var val=parseInt($("#cbdim").val());
+        //console.log(val);
+        //居中显示盒子
+        var boxloop=val*val;
+        var boxleft=($(window).width()-val*78)/2;
+        $("#dimcontainer").css({
+            width:val*78,
+            left:boxleft
+        });
+        //3，开始生成小的div，并且随机赋值    数字范围    1-15
+        for(var i=0;i<boxloop;i++){
+            numbers[i]=Math.floor(Math.random()*15+1);
+            //在xxx之前添加节点
+            $("#boxclear").before('<div class="boxnum" id="num'+i+'"><p>'+numbers[i]+'</p></div>');
+        }
+        //随机抽取3个数字，累加，显示到网页上去
+        getRandomNum();
+        //开始玩游戏，判断
+        //对小的div做点击事件
+        var mysum=0;
+        var clickNum=0;
+        $(".boxnum").click(function(){
+
+            if($("this").attr("class")=="boxnum active"){
+                $(this).attr("class","boxnum");
+                var val=parseInt($(this).text());
+                mysum=mysum-val;
+                clickNum--;
+                arrays1.splice($.inArray(indexRan,arrays1),1);
+            }else if($(this).attr("class")=="boxnum success"){
+
+            }else {
+                $(this).addClass("active");
+                var val=parseInt( $(this).text() );
+                mysum=mysum+val;
+                clickNum++;
+                //把我们点击的添加到数组里面去
+                var thisid=$(this).attr("id");
+                arrays1.push( parseInt( thisid.substr(3) ) );
+                if(clickNum>=3 && mysum!=totalnum){
+                    mysum=0;
+                    clickNum=0;
+                    $(".boxnum").removeClass("active");
+                }else if(mysum==totalnum){
+                    mysum=0;
+                    clickNum=0;
+                    $(".active").addClass("success");
+                    $(".boxnum").removeClass("active");
+                    if($(".success").size()==numbers.length){
+                        alert("游戏结束");
+                        return;
+                    }
+                    getRandomNum();
+                }
+            }
+        });
+
+        //1，未选中状态，2，选中状态active 红色  3，成功状态  success 灰色
+    }
+function getRandomNum(){
+    //随机抽取1-3个数
+    var loopRan=Math.floor(Math.random()*3+1);
+    var arrays2=new Array();
+    var sum=0;
+    for(var i=0;i<loopRan;i++){
+        //随机取值
+        indexRan=Math.floor(Math.random()*numbers.length);
+        //判断，不可重复   indexOf()=-1
+
+
+        indexRan=getUnique(indexRan,arrays1,arrays2);
+        sum=sum+ parseInt($("#num"+indexRan).text());
+        arrays2.push(indexRan);
+    }
+    //显示到网页上去
+    $("#nextsum").html(sum);
+      //console.log(sum);
+     totalnum=sum;
+    //console.log(sum);
+}
+    //封装方法，用于递归
+    function getUnique(indexRan,arrays1,arrays2){
+        if($.inArray(indexRan,arrays1)==-1 && $.inArray(indexRan,arrays2)==-1){
+            return indexRan;
+        }else {
+            //重复必须重新的选择一个索引，继续判断
+            var rindex=Math.floor(Math.random()*numbers.length);
+                return getUnique(rindex,arrays1,arrays2);
+        }
+    }
+
+
+
+
+</script>
+</body>
+</html>
