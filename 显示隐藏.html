@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        span{
+            display: inline-block;
+            width: 40px;
+            height: 25px;
+            background: #b5b4b4;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px;
+            color: white;
+            cursor: pointer;
+        }
+        .active{
+            background: red;
+        }
+        #div1 div{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            margin: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <span class="active">1</span>
+    <span >2</span>
+    <span >3</span>
+    <div style="display: block">11111</div>
+    <div>22222</div>
+    <div>33333</div>
+</div>
+    <script src="jquery-1.9.1.js"></script>
+<script>
+  $(function(){
+      //对于事件而言，jQuery会自动的循环
+      $("#div1 span").click(function(){
+          //首先去掉样式
+          $("#div1 span").attr("class","");
+          //隐藏div
+          $("#div1 div").css("display","none");
+          //自己对应的这个div显示，自己的颜色变化
+          $(this).attr("class","active");
+          //    $(this).index()自己在这数组里的索引 ，换句话来说  就是数组里的第几个
+          $("#div1 div").eq($(this).index()).css("display","block");
+
+      })
+
+
+
+
+  })
+
+
+</script>
+</body>
+</html>

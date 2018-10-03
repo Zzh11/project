@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 1200px;
+            height: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: url(http://cdn.attach.qdfuns.com/notes/pics/201701/11/004435fkxwv3xt5pp8xf1x.jpg) no-repeat;
+        }
+
+        .wrap {
+            width: 852px;
+            height: 402px;
+            background: #7164c6;
+            margin: 158px auto;
+            border-radius: 5px;
+            padding: 27px;
+            position: relative;
+        }
+
+        .left, .right {
+            width: 300px;
+            height: 350px;
+            background: #ebf8f9;
+            border-radius: 5px;
+            float: left;
+            color: #7164c6;
+            font: 16px/24px "微软雅黑";
+            text-indent: 2em;
+            padding: 20px;
+        }
+        .right{
+            overflow: auto;
+            color: palevioletred;
+        }
+
+        .wrap div:nth-child(3) {
+
+            float: right;
+
+        }
+
+        .middle {
+
+            overflow: hidden;
+
+            width: 100px;
+
+            height: 150px;
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            margin: auto;
+
+        }
+
+        .btn {
+
+            display: block;
+
+            /*width: 100px;*/
+
+            height: 80px;
+
+            background: #6de0fd url(http://cdn.attach.qdfuns.com/notes/pics/201701/11/004434hhr7rr8srn0lmr95.png) no-repeat center 8px;
+
+            border: 1px solid #6de0fd;
+
+            border-radius: 5px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+        }
+
+        .btn strong {
+
+            color: white;
+
+            display: block;
+
+            font-size: 14px;
+
+            margin-top: 55px;
+
+            font-family: simhei;
+
+        }
+
+        .btn .num {
+
+            color: white;
+
+            display: block;
+
+            margin-top: 20px;
+
+            font-size: 20px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div class="box">
+
+    <div class="wrap">
+
+        <textarea class="left">今生我在红尘深处守望你，种一抹心香守候你在弱水三千的繁华里；携一抹温暖等待你在流年清浅的岁月中；捻一抹牵念守望你在似水流年的归期里。为你我倾尽温柔抚一曲高山流水遇知音，为你我舞尽落红奏一曲长相依。 任季节流转，任年华如玉，唯爱你的心永相系。一季静秋，一抹牵念，染一地的枫红菊黄，醉一指沧桑流年。书一笺绕指柔情，伴你浅舞天涯。 沏一杯清茗独品一江春水，拂一曲禅心弹奏青莲佛音，绘一笔丹青描画比翼双飞，染一壑红枫相伴懂你之人。</textarea>
+
+        <div class="middle">
+
+<span class="btn">
+
+<strong>把文字右移</strong>
+
+<span class="num">0/0</span>
+
+</span>
+
+        </div>
+
+        <div class="right"></div>
+
+    </div>
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+
+    //获取元素
+
+    var leftTxt = document.querySelector(".left");
+
+    var rightTxt = document.querySelector(".right");
+
+    var btn = document.querySelector(".btn");
+
+    var num = document.querySelector(".num");
+
+    btn.onclick = function() {
+
+        move();
+
+    }
+
+    //封装
+
+    function move() {
+
+        var n = 0;
+
+        var fenge = leftTxt.value.split('');
+
+        var timer = setInterval(function() {
+
+            if(n >= fenge.length-1) {
+
+                clearInterval(timer);
+
+                n >=fenge.length-1
+
+                alert('搬运完工')
+
+            }
+
+            rightTxt.innerHTML += fenge[n];
+
+            leftTxt.value = leftTxt.value.substring(1);
+
+            num.innerHTML = '<span>'+leftTxt.value.length+'</span>/<span>'+fenge.length+'</span>';
+
+            n++;
+
+        }, 25)
+
+    }
+
+</script>
+
+
+</body>
+</html>

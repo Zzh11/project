@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #left{
+            width: 400px;
+            height: 400px;
+            border: 2px solid indianred;
+            float: left;
+            position: relative;
+
+        }
+        #right{
+            width: 400px;
+            height: 400px;
+            border: 2px solid indianred;
+            float: left;
+            position: relative;
+        }
+        button{
+            background: skyblue;
+            margin: 20px;
+            float: left;
+            border-radius: 3px;
+        }
+        span{
+            display: block;
+            width: 40px;
+            height: 20px;
+            background: skyblue;
+            position: absolute;
+            top:350px;
+            left: 290px;
+            border: 1px solid skyblue;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="left">
+        <p>
+            额的根源发给我业股份一位法国英文翻译共分为
+            湖北是度是华为四一你觉得女神泪课代表上发布
+            时间金山毒霸，不仅能 不健康的大关键时刻咋
+        </p>
+             <span></span>
+    </div>
+
+    <button id="bl"> --> </button>
+    <button id="br"> <-- </button>
+
+
+    <div id="right">
+
+        <p>
+            还是打开就会加快那就肯定不能尽快你看酒店内部监控
+            肯德基妇女节南大街妇女看到你的激发你的伤口看得见
+            你发是空间的是大空间空间发帖或部分更新用是大
+        </p>
+        <span ></span>
+    </div>
+
+<script>
+    var left=document.getElementById("left");
+    var right=document.getElementById("right");
+    var ps=document.getElementsByTagName("p");
+    var bl=document.getElementById("bl");
+    var br=document.getElementById("br");
+    var spans=document.getElementsByTagName("span");
+
+    //定时器
+    var timer=null;
+
+    bl.onclick=function(){
+        fn(0,1);
+    }
+
+    br.onclick=function(){
+        fn(1,0);
+    }
+
+
+
+
+    function fn(n,n1){
+        var num=0;
+        var len=ps[n].innerHTML.length;
+        if(len <=0) {
+            alert('搬运完');
+            return;
+        }
+
+        //可以搬运，开始起定时器
+        var timer = setInterval(function() {
+            //什么时候结束定时器
+            if(ps[n].innerHTML.length<=0){
+                clearInterval(timer);
+            }
+            //核心内容，每次截取第一个值，放到怕PS[n1]里面去
+            ps[n1].innerHTML += ps[n].innerHTML.charAt();
+
+            //然后，把p[n]的第一个字符删掉
+            ps[n].innerHTML = ps[n].innerHTML.substring(1);
+
+            spans[n].innerHTML =ps[n].innerHTML.length+"/"+len;
+            spans[n1].innerHTML =ps[n1].innerHTML.length+"/"+len;
+
+            num++;}, 50)
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

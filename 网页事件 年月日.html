@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <select id="year" onchange="setDays(this,month,day)">
+            <option>年</option>
+    </select>
+
+    <select id="month" onchange="setDays(year,this,day)">
+        <option>月</option>
+    </select>
+
+    <select id="day">
+        <option>日</option>
+    </select>
+
+
+<script>
+    //首先，应该把年月日都补全
+    window.onload=function(){
+        for(var i=new Date().getFullYear();i>1901;i--){
+            //封装方法
+            addOption("year",i);
+        }
+
+        //补全月份
+        for(var i=1;i<=12;i++){
+            addOption("month",i);
+        }
+
+        //日期，先默认，都是31天
+        for(var i=1;i<=31;i++){
+            addOption("day",i);
+        }
+    }
+    //然后，当我们改变年，月的时候，日也要改变
+    function setDays(y,m,d){
+        //如果传过来的是字符串，那么document.getElementById();
+        //console.log(y.innerHTML);
+        //console.log(m.innerHTML);
+        //console.log(d.innerHTML);
+        var monthDays=[31,28,31,30,31,30,31,31,30,31,30,31];
+
+        //得到当前年是多少年，多少月
+        var yvalue=parseInt(y.value);
+        var mvalue=parseInt(m.value);
+
+        //当前年的当前月，有多少天
+        var num=monthDays[mvalue-1];
+       // 判断
+        var flag=yvalue%4==0 &&yvalue%100 !=0 ||  yvalue %400==0;
+        if(mvalue==2 && flag){
+           // 闰年2月
+            num++;
+        }
+    //现在已经得到了，前年的当前月，有多少天
+        // 先减去多余的的天
+                    //减去option为日的这一个值
+        for(var j=d.options.length-1;j>num;j--){
+            //有多个，则移除
+            d.remove(j);
+        }
+        for(var j=d.options.length;j<=num;j++){
+            addOption("day",j);
+        }
+    }
+
+    function addOption(id,value){
+        var option=document.createElement("option");
+        //设置value属性
+        option.value=value;
+        //设置文本内容
+        option.text=value;
+
+        //根据ID得到DOM
+        var sel=document.getElementById(id);
+        //添加到网页里面去
+        //得到这个select下面所有的options
+        sel.options.add(option);      //select独有的
+
+    }
+
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>拖拽</title>
+<style type="text/css">
+#box{
+	position:absolute;
+	left:300px;
+	top:100px;
+	padding:5px;
+	background:#f0f3f9;
+	font-size:12px;
+	-moz-box-shadow:2px 2px 4px #666666;
+	-webkit-box-shadow:2px 2px 4px #666666;
+}
+
+#main{
+	border:1px solid #a0b3d6;
+	background:white;
+}
+
+#title{
+	line-height:24px;
+	background:#beceeb;
+	border-bottom:1px solid #a0b3d6;
+	padding-left:5px;
+	cursor:move;
+}
+
+#content{
+	width:420px;
+	height:250px;
+	padding:10px 5px;
+}
+
+#title_close{
+	color:red;
+	float:right;
+	font-size:30px;
+	font-weight:bold;
+	cursor:pointer;
+	position:absolute;
+	right:8px;
+	top:2px;
+}
+</style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="main">
+            <div id="title">可拖拽
+            	<span id="title_close">x</span>
+            </div>
+            <div id="content">
+                内容……
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+
+
+
+	var box=document.getElementById("box");
+	var title=document.getElementById("title");
+	var closer=document.getElementById("title_close");
+	closer.onclick=function(){
+		box.style.display="none";
+	}
+	//定义一个参数对象
+	var params={
+		x:0,
+		y:0,
+		top:0,
+		left:0,
+		flag:false //监听鼠标是否按下
+	}
+
+function getStyle(o,key){
+	if(o.currentStyle ){
+		return o.currentStyle[key];
+	}else{
+		                        //这个false是否为伪类样式
+		return getComputedStyle(o,false)[key];
+	}
+}
+
+//开始拖拽
+	function startDrag(){
+		//一开始，我们应该把这个值得到
+		params.left=getStyle(box,"left");
+		params.top=getStyle(box,"top");
+
+		title.onmousedown=function(event){
+			//条件满足，可以开始拖动了
+			params.flag=true;
+			//记录我们按下的坐标
+			params.x=event.clientX;
+			params.y=event.clientY;
+		}
+		//整个网页来监听鼠标是否松开
+		document.onmouseup=function(){
+			//松开，则不能拖动了
+			params.flag=false;
+		}
+		//整个网页来监听鼠标是否移动
+		document.onmousemove=function(event){
+			//判断一下，你是否满足移动的条件
+			if(params.flag==true){
+				var nowX=event.clientX;
+				var nowY=event.clientY;
+				//计算差值这个差值，就是我们div移动的距离
+
+				var disX=nowX-params.x;
+				var disY=nowY-params.y;
+				//开始移动div
+				box.style.left=(parseInt(params.left) + disX)+"px";
+				box.style.top=(parseInt(params.top) + disY)+"px";
+			}
+		}
+	}
+startDrag();
+</script>
+
+
+
+
+
+</body>
+</html>
