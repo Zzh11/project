@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.bigImage{
+			display:inline-block; 
+			width:1.2em; 
+			height:1.1em; 
+			text-align:center; 
+			font-size:128px;
+		}
+		.bigImage img.smallImage{
+			padding:3px; 
+			border:1px solid #cccccc; 
+			background:white; 
+			vertical-align:middle; 
+			position:relative;
+		}
+		.bigImage:hover,.bigImage:hover img.smallImage{
+			border-color:#ff3300;
+		}
+		.mydiv{
+			width:400px; 
+			height:400px; 
+			padding:3px; 
+			background:white; 
+			border:1px solid #cccccc; 
+			text-align:center; 
+			position:absolute; 
+			z-index:1000; 
+			left:0; 
+			top:0; 
+			overflow:hidden;
+		}
+	</style>
+</head>
+<body>
+	<div>
+        <a href="images/big4.jpg" class="bigImage">
+            <img class="smallImage" src="images/small4.jpg" />
+        </a>
+    </div>
+
+    <script type="text/javascript" src="./js/jquery-1.11.1.js"></script>
+    <script>
+		$(function(){
+		   var options={
+				xzoom:400,  //放大镜的大小
+			    yzoom:400,
+			    offset:10,    //放大镜的距离
+			};
+			var imageLeft=1;
+			var imageRight=1;
+			var imageTop=1;
+			var imageWidth=1;
+			var imageHeight=1;
+
+			//hover()  鼠标移入移除 第一个是鼠标移入  第二个事件是鼠标移出
+			$("img.smallImage").hover(function(){
+				//获取到这个图片的所有位置信息
+				imageLeft=this.offsetLeft;
+				imageRight=this.offsetRight;
+				imageTop=this.offsetTop;
+				imageWidth=this.offsetWidth;
+				imageHeight=this.offsetHeight;
+				//获取大图片的路径
+				var bigImage=$(this).parent().attr("href");
+				//图片路径有了，接着可以开始创建图片了
+				if($("div.mydiv").length==0 ){   //如果没有div，才创建
+					$(this).after("<div class='mydiv'><img class='bigimg' src='"+bigImage+"'/></div>")
+				}
+
+				//设置大图位置
+				$("div.mydiv").css({
+					top:imageTop,
+					left:imageLeft+imageWidth+options.offset
+				});
+				//第二个事件是鼠标移出
+			},function(){
+				$("div.mydiv").remove();
+			});
+
+			//添加移动事件
+			$("img.smallImage").mousemove(function(e){
+                  var bigWidth=$(".bigimg").get(0).offsetWidth;
+				  var bigHeight=$(".bigimg").get(0).offsetHeight;
+
+				//计算图片的缩放比率
+				var scalex=bigWidth/imageWidth;
+				var scaley=bigHeight/imageHeight;
+
+				//计算大图显现的区域位置
+				var scrollx= e.pageX-imageLeft-( $("div.mydiv").width()/scalex/2 );
+				$("div.mydiv").get(0).scrollLeft=scrollx*scalex;
+				var scrolly= e.pageY-imageTop-($("div.mydiv").height()/scaley/2);
+				$("div.mydiv").get(0).scrollTop=scrolly*scaley;
+			});
+
+		})
+
+
+	</script>
+</body>
+</html>
