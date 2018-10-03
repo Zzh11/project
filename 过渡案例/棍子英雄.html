@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 300px;
+            height: 500px;
+            border: 1px solid #000;
+            margin: 70px auto;
+
+            overflow: hidden;
+        }
+        #content{
+            width: 600px;
+            height: 500px;
+            background: yellow;
+            position: relative;
+            left: 0;
+        }
+        #leftdiv{
+            width: 80px;
+            height: 200px;
+            background: #000;
+            position: absolute;
+            bottom: 0;
+        }
+        #middiv{
+            width: 80px;
+            height: 200px;
+            background: #000;
+            position: absolute;
+            left: 200px;
+            bottom: 0;
+        }
+        #rightdiv{
+            width: 80px;
+            height: 200px;
+            background: #000;
+            position: absolute;
+            left: 400px;
+            bottom: 0;
+        }
+        #hero{
+            width: 40px;
+            height: 40px;
+            background: red;
+            position: absolute;
+            left: 0;
+            bottom: 200px;
+        }
+        #stick{
+            width: 0px;
+            height: 6px;
+            background: lime;
+            position: absolute;
+            bottom: 200px;
+            left: 40px;
+
+            transform: rotate(-90deg);
+            transform-origin:0 6px ;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="content">
+            <div id="leftdiv"></div>
+            <div id="middiv"></div>
+            <div id="rightdiv"></div>
+            <div id="hero"></div>
+            <div id="stick"></div>
+        </div>
+    </div>
+<script>
+    var stick=document.getElementById("stick");
+    var leftdiv=document.getElementById("leftdiv");
+    var middiv=document.getElementById("middiv");
+    var rightdiv=document.getElementById("rightdiv");
+    var hero=document.getElementById("hero");
+    var box=document.getElementById("box");
+    var content=document.getElementById("content");
+
+    var num=0;   //棍子的长度
+    var step=0;
+    var timer=null;
+    var isPlaying=false;
+    var flag=true;//判断游戏是否接受
+
+    //游戏一开始的时候，中间的方块，大小，距离，都应该随机
+    middiv.style.width=creatNum(40,80)+"px";   //40-80
+    middiv.style.left=creatNum(80,220)+"px";   //80-220
+
+    //鼠标按下，棍子变长
+    box.onmousedown=function(){
+        if(isPlaying){
+            return;
+        }
+        timer=setInterval(function(){
+            num+=2;
+            stick.style.width=num+"px";
+        },20);
+    }
+    //鼠标松开，棍子倒下来
+    box.onmouseup=function(){
+        if(isPlaying){
+            return;
+        }
+        clearInterval(timer);
+        isPlaying=true;
+
+        stick.style.transition="0.5s";
+        stick.style.transform="rotate(0deg)";
+
+        next=creatNext();
+        rightdiv.style.width=next[1]+"px";   //40-80
+        rightdiv.style.left=next[0]+"px";
+        //游戏判断
+        if(num+40<middiv.offsetLeft || num+40>middiv.offsetLeft+middiv.offsetWidth){
+            console.log("失败");
+            flag=false;
+        }
+    }
+    //红色的小方块什么时候移动，？
+    stick.addEventListener("transitionend",function(){
+        if(flag==true){
+            hero.style.transition="1s";
+            hero.style.left=middiv.offsetLeft+"px";
+        }else {
+            alert("游戏失败");
+        }
+    });
+    //当红色的小方块移动完毕，游戏区域往左移动
+    hero.addEventListener("transitionend",function(ev){
+        content.style.transition="1s";
+        content.style.left=-middiv.offsetLeft+"px";
+        step=1;
+        //禁止事件冒泡
+        ev.stopPropagation();
+    });
+    content.addEventListener("transitionend",function(){
+        //注意，事件冒泡
+        if(step==1){
+            //一切还原
+            content.style.transition="none";
+            content.style.left=0;
+            hero.style.transition="none";
+            hero.style.left=0;
+            stick.style.transition="none";
+            stick.style.transform="rotate(-90deg)";
+            stick.style.width=0;
+            isPlaying=false;
+            num=0;
+            step=0;
+
+            leftdiv.style.width=middiv.style.width+"px";
+            middiv.style.width=next[1]+"px";
+            middiv.style.left=next[0]-middiv.offsetLeft+"px";
+        }
+
+    })
+    function creatNum(start,end){
+        return parseInt(Math.random()*(end-start)+start);
+    }
+    function creatNext(){
+        var iWidth=creatNum(40,80);
+        var iLeft=creatNum(300,220+middiv.offsetLeft);
+        return [iLeft,iWidth];
+    }
+
+</script>
+</body>
+</html>

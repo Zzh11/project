@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #menu{
+            width:50px;
+            height: 50px;
+            position: fixed;
+            left:50%;
+            top:50%;
+        }
+        #menu_list img{
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        #home{
+            width: 50px;
+            height: 50px;
+            background: url("images/home.png") no-repeat;
+            position: absolute;
+            left: 0px;
+            top:0px;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div id="menu_list">
+            <img src="images/clos.png"/>
+            <img src="images/full.png"/>
+            <img src="images/open.png"/>
+            <img src="images/prev.png"/>
+            <img src="images/refresh.png"/>
+        </div>
+        <div id="home"></div>
+
+    </div>
+
+<script>
+    var home=document.getElementById("home");
+    var imgs=document.querySelectorAll("img");
+    var flag=true;
+    var r=150;
+    home.onclick=function(){
+        //先写简单的
+        if(flag){
+            this.style.transform="rotate(360deg)";
+            this.style.WebkitTransform="rotate(360deg)";
+            for(var i=0;i<imgs.length;i++){
+                imgs[i].style.transition="0.5s "+100*i+"ms";
+                imgs[i].style.left=Math.round(Math.cos(Math.PI/180*22.5*i)*r)+"px";
+                imgs[i].style.top=Math.round(Math.sin(Math.PI/180*22.5*i)*r)+"px";
+                imgs[i].style.transform="rotate(720deg)";
+                imgs[i].style.WebkitTransform="rotate(720deg)";
+
+            }
+        }else {
+            this.style.transform="rotate(0deg)";
+            this.style.WebkitTransform="rotate(0deg)";
+
+            for(var i=0;i<imgs.length;i++){
+                imgs[i].style.transition="0.5s "+100*i+"ms";
+                imgs[i].style.left="0px";
+                imgs[i].style.top="0px";
+                imgs[i].style.transform="rotate(0deg)";
+                imgs[i].style.WebkitTransform="rotate(0deg)";
+            }
+        }
+        flag=!flag;
+    }
+</script>
+</body>
+</html>
