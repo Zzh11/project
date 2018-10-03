@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="v_show">
+        <div class="v_caption">
+            <h2 class="cartoon" title="卡通动漫">卡通动漫</h2>
+            <div class="highlight_tip">
+                <span class="current">1</span><span>2</span><span>3</span><span>4</span>
+            </div>
+            <div class="change_btn">
+                <span class="prev" >上一页</span>
+                <span class="next">下一页</span>
+            </div>
+            <em><a href="#">更多>></a></em>
+        </div>
+        <div class="v_content">
+            <div  class="v_content_list">
+                <ul>
+                    <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/01.jpg" alt="海贼王" /></a><h4><a href="#">海贼王</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                    <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                    <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                    <li><a href="#"><img src="img/02.jpg" alt="哆啦A梦" /></a><h4><a href="#">哆啦A梦</a></h4><span>播放:<em>33,326</em></span></li>
+                    <li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/03.jpg" alt="火影忍者" /></a><h4><a href="#">火影忍者</a></h4><span>播放:<em>28,276</em></span></li>
+                    <li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+                    <li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+                    <li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+                    <li><a href="#"><img src="img/04.jpg" alt="龙珠" /></a><h4><a href="#">龙珠</a></h4><span>播放 <em>57,865</em></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<script src="jquery-1.9.1.js"></script>
+<script>
+        //jquery的方法，一般也是符合语义的
+        //父节点 找div的class为v_show的父节点
+    var $parent=$("span.next").parents("div.v_show");
+        //查找，在parent里面查找其他的节点
+    var content=$parent.find("div.v_content");    //简单点就是     $("div.v_content")
+    var list=$parent.find("div.v_content_list");
+    var i=4;      //每次滑动4个
+    var page=1;   // 默认第一页
+
+
+    //获取总长度
+    var c_width=content.width();
+    var len=content.find("li").length;    //有多少个li
+    //计算页数
+    var pageCount=Math.ceil(len/i);     //向上取整
+
+    //下一页
+    $("span.next").click(function(){
+       //is();   判断是否在一个状态，是为true，否为false    :animated是否正在动画中
+        //等动画完成后，再添加动画
+        if(!list.is(":animated")){
+            if(page==pageCount){
+                //最后一张，返回第一张
+                list.animate({left:"0px"},"slow");
+                page=1;
+
+            }else {
+                list.animate({left:"-="+content.width()},"slow");
+                page++;
+            }
+
+            //改变上面的点点
+            //jQuery有一个典型的操作，链式操作
+            //eq是索引，所以要-1                  添加class           所有的兄弟节点     移除class
+            $(".highlight_tip span").eq(page-1).addClass("current").siblings().removeClass("current");
+
+        }
+
+    });
+
+    //上一页
+    $("span.prev").click(function() {
+        if(!list.is(":animated")) {
+            if (page == 1) {
+                //第一张，返回最后一张
+                list.animate({left: "-=" + content.width() * (pageCount - 1)}, "slow");
+                page = pageCount;
+            } else {
+                list.animate({left: "+=" + content.width()}, "slow");
+                page--;
+            }
+            $(".highlight_tip span").eq(page - 1).addClass("current").siblings().removeClass("current");
+        }
+    });
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
