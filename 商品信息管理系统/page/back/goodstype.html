@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>商品类型管理</title>
+<link rel="shortcut icon" href="../images/yc2.png" type="image/x-icon" />
+<script type="text/javascript" src="../js/jquery-1.12.4.js"></script>
+</head>
+<body>
+    <fieldset>
+        <legend>添加商品类型</legend>
+        商品类型名称：<input type="text" name="tname" id="tname">
+        <input type="button" value="添加" onclick="addGoodsType()">
+    </fieldset>
+
+    <fieldset>
+        <legend>已有商品类型信息</legend>
+        <table align="center" width="60%" border="1px" cellpadding="0px" cellspacing="0px">
+            <thead>
+                <tr>
+                    <th>商品类型编号</th>
+                    <th>商品类型名称</th>
+                    <th>商品类型操作</th>
+                </tr>
+            </thead>
+            <tbody id="goodsTypeInfo" align="center">
+
+            </tbody>
+        </table>
+    </fieldset>
+<script>
+    //一进入到网页，就应该吧所有的商品类型都查出来
+    $(function(){
+        $.get("/getAllTypes",null,function(data){
+                    if(!data.err){
+                        $.each(data,function(index,item){
+                            $("#goodsTypeInfo").append($('<tr><td>'+item.tid+'</td><td>'+item.tname+'</td><td>' +
+                                    '<a href="javascript:void(0)" onclick="delGoodsType(this,'+item.tid+')">[删除]</a></td></tr>') );
+                        });
+                    }
+        },"json");      //这里需要与服务器两边对应
+
+    });
+
+    function addGoodsType(){
+        //得到输入的值
+        var tname=$("#tname").val();
+        if(tname!="" && tname!=null){
+            //发ajax请求，    地址路径问题
+            $.post("/addGoodsType",{tname:tname},function(data){
+                //0就代表插入失败，或者是没有值
+                if(data=="-1"){
+                    alert("该商品类型已经存在");
+                }else {
+                    $("#tname").val("");
+                    //把当前的这一条数据，添加到表格当中去
+                    var str='<tr><td>'+data+'</td><td>'+tname+'</td><td>' +
+                            '<a href="javascript:void(0)" onclick="delGoodsType(this,'+data+')">[删除]</a></td></tr>';
+
+                    $("#goodsTypeInfo").append(str);
+
+                }
+            })
+        }
+
+
+    }
+    function delGoodsType(obj,tid){
+        //删除就是把tid这一列的status状态设置为0
+        $.post("/delGoodsType",{tid:tid},function(data){
+            if(data=="-1"){
+                alert("删除失败");
+            }else{
+                $(obj).parent().parent().remove();
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
