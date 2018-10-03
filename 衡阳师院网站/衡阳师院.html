@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑";
+        }
+        a{
+            text-decoration: none;
+        }
+        li{list-style: none;
+
+        }
+        #top{
+            height:30px;
+            background: #b5b4b4;
+        }
+        #top .s1{
+            margin-left: 40px;
+            float: left;
+            color: #FFFFFF;
+            line-height: 30px;
+        }
+        #top .s2{
+            margin-left: 40px;
+            float: left;
+            color: #FFFFFF;
+            line-height: 30px;
+        }
+        #top .s3{
+            margin-right: 40px;
+            float: right;
+            color: #FFFFFF;
+            line-height: 30px;
+        }
+
+        #head{
+            height:142px;
+            overflow: auto;
+        }
+        #head .headCenter{
+            width: 1200px;
+            margin: 30px auto 0px;
+
+        }
+        #head .headCenter .i2{
+            float: right;
+            margin-top: 20px;
+        }
+
+
+        #nav{
+            height:48px;
+            background:red;
+        }
+        #nav a{
+            float: left;
+            line-height: 48px;
+            width: 9%;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            
+        }
+        #nav .a1{
+            margin-left: 4%;
+        }
+        #bigImg{
+            height:535px;
+            background:url("images/bigImg.gif");
+            background-size: cover;
+        }
+        #toolBox{
+            height: 102px;
+            background:#ebebeb ;
+        }
+
+        #toolBox #search {
+            width: 396px;
+            height: 48px;
+            float: left;
+            margin-left: 35px;
+        }
+        #search #inp{
+            float: left;
+            width: 296px;
+            height:48px;
+            margin-top: 30px;
+            border: none;
+            font-size: 16px;
+            padding-left: 10px;
+        }
+        #search #sousuo{
+            float: left;
+            font-size: 16px;
+            margin-top: 30px;
+            width: 79px;
+            height:48px;
+            background: #a80000;
+            color: white;
+            border: 1px solid  #a80000;
+        }
+        #toolBox .line{
+            width:1px;
+            height:100%;
+            border-right: 1px solid #d1d1d1;
+            float: left;
+        }
+        #toolBox #title li{
+            float: left;
+            padding: 15px 12px 5px;
+
+        }
+        #title li:hover{
+            color: #A90000;
+        }
+        #title .pic1{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/wl.png") no-repeat center;
+        }
+        #title .pic2{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/gk.png") no-repeat center;
+        }
+        #title .pic3{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/yg.png") no-repeat center;
+        }
+        #title .pic4{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/xl.gif") no-repeat center;
+        }
+        #title .pic5{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/xx.png") no-repeat center;
+        }
+        #title .pic6{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/zx.png") no-repeat center;
+        }
+        #title .pic7{
+            width: 90px;
+            height:45px;
+            display: block;
+            background: url("images/xytd.png") no-repeat center;
+        }
+        #title .text{
+            display: block;
+            width: 90px;
+            text-align: center;
+            margin-top: 5px;
+        }
+        #content{
+            width: 1200px;
+            height: 1300px;
+            background: white;
+            margin: 0 auto;
+        }
+        #news{
+            height: 450px;
+
+        }
+        #news .s1{
+            font-size: 18px;
+           font-weight: bold;
+        }
+        #news .s2{
+            color:#b5b4b4;
+            font-style:italic;
+            margin-left: 5px;
+        }
+        #news .s3{
+            float: right;
+            color: #a80000;
+        }
+        #news .jt{
+            width: 100%;
+            height: 30px;
+            background: url("images/jiantou.png") no-repeat ;
+            background-position: 30px 0;
+            border-top: solid 1px #a80000 ;
+            margin-top: 10px;
+
+        }
+        #news #new-l{
+            width: 580px;
+            height: 350px;
+            background: url("images/baogao.jpg" );
+            position: relative;
+
+        }
+        #news #new-l a{
+            border-radius:5px  ;
+            width:36px;
+            height:36px;
+            margin:5px;
+            display:inline-block;
+            border:1px solid #e1e2e3;
+            text-align:center;
+            line-height:36px;
+            color: white;
+
+        }
+        #news  .bt{
+            width: 580px;
+            font-size: 18px;
+            text-align: center;
+
+        }
+        #new-r{
+            float: left;
+            width: 600px;
+            height: 370px;
+
+            margin-left: 10px;
+        }
+        #new-r ul li{
+            width:600px;
+            height:38px;
+            line-height:38px ;
+
+            }
+        #new-r ul li a{
+            color: #2E2E2E;
+        }
+
+        #new-r ul li em {
+            text-align: center;
+            padding: 3px 6px;
+            font-size: 12px;
+            margin-right: 10px;
+            font-style: normal;
+            background:#A80000 ;
+            border: solid 1px;
+            color: white;
+
+
+        }
+        #new-r ul li span {
+            color: #2E2E2E;
+            float: right;
+            font-size:16px
+        }
+        #Tonggao{
+            height: 370px;
+
+        }
+        #Tonggao .s1{
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #Tonggao .s2{
+            color:#b5b4b4;
+            font-style:italic;
+            margin-left: 5px;
+        }
+        #Tonggao .s3{
+            float: right;
+            color: #a80000;
+        }
+        #Tonggao #l{
+            width: 32%;
+            height: 350px;
+            float: left;
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+        #l .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background: url("images/jiantou.png") no-repeat ;
+            background-position: 30px 0;
+            margin-top: 10px;
+        }
+        #l li{
+            width: 100%;
+            height: 80px;
+        }
+        #l .d1{
+            background: #A90000;
+            text-align: center;
+            border-radius: 4px 4px 0 0;
+        }
+        #l .d2{
+            background: #E6E6E6;
+            text-align: center;
+            border-radius: 0 0 4px 4px;
+        }
+        #Tonggao #c{
+            width: 32%;
+            height: 350px;
+            float: left;
+
+            margin-right: 20px;
+            margin-top: 20px;
+        }
+        #c .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background: url("images/jiantou.png") no-repeat;
+            background-position: 30px 0;
+            margin-top: 10px;
+        }
+        #c li{
+            width: 100%;
+            height: 80px;
+        }
+        #c .dddd{
+            float: left ;
+            width: 118px;
+            height: 40px;
+            background:#E6E6E6;
+            line-height: 40px;
+            text-align: center;
+            color: #A80000;
+        }
+        #Tonggao #r{
+            width: 32%;
+            height: 350px;
+
+            float: left;
+            margin-top: 20px;
+        }
+        #r .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background:url("images/jiantou.png" )  no-repeat;
+            background-position:30px 0px;
+            margin-top: 10px;
+        }
+
+        #r li{
+            width: 100%;
+            height: 40px;
+        }
+        #r .span{
+            float: left;
+            width: 95px;
+            height: 30px;
+            color: #d1d1d1;
+            line-height: 30px;
+            background: url("images/redgang_bg.png " ) no-repeat right;
+        }
+        #r .a3{
+            font-size: 14px;
+            color: #333333;
+            line-height: 30px;
+            margin-left: 15px;
+        }
+        #Project{
+            width: 100%;
+            height: 240px;
+
+
+        }
+        #Project .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background:url("images/jiantou.png" )  no-repeat;
+            background-position:30px 0px;
+            margin-top: 10px;
+
+        }
+        #Project .s1{
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #Project .s2{
+            color:#b5b4b4;
+            font-style:italic;
+            margin-left: 5px;
+        }
+        #Project .s3{
+            float: right;
+            color: #a80000;
+        }
+        #Project .a{
+            float: left;
+            margin:15px 10px;
+        }
+        #channel{
+            width: 100%;
+            height: 120px;
+
+        }
+        #channel .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background:url("images/jiantou.png" )  no-repeat;
+            background-position:30px 0px;
+            margin-top: 10px;
+        }
+        #channel .s1{
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #channel .s2{
+            color:#b5b4b4;
+            font-style:italic;
+            margin-left: 5px;
+        }
+        #channel .s3{
+            float: right;
+            color: #a80000;
+        }
+        #channel .s4{
+            float: left;
+            width: 10%;
+            background: url("images/fast.png" ) no-repeat left;
+        }
+        #channel a{
+            color: #333333;
+            margin-left: 20px;
+
+        }
+        #Quick{
+
+            width: 100%;
+            height: 120px;
+
+        }
+        #Quick .jt{
+            border-top:1px solid #A90000 ;
+            width: 100%;
+            height: 10px;
+            background:url("images/jiantou.png" )  no-repeat;
+            background-position:30px 0px;
+            margin-top: 10px;
+        }
+        #Quick .s1{
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #Quick .s2{
+            color:#b5b4b4;
+            font-style:italic;
+            margin-left: 5px;
+        }
+        #Quick .s3{
+            float: right;
+            color: #a80000;
+        }
+        #Quick .s4{
+            float: left;
+            width: 12.5%;
+            background: url("images/fast.png" ) no-repeat left;
+        }
+        #Quick a{
+            color: #333333;
+            margin-left: 20px;
+        }
+        #foot{
+            width: 100%;
+            height: 187px;
+            background: #A90000;
+        }
+        #foot .img1{
+            float: left;
+            margin: 40px;
+        }
+        #foot .p{
+            float: left;
+            color: white;
+            margin-top: 50px;
+
+        }#foot .p p{
+            margin-bottom: 10px;
+                 }
+        #foot .img2{
+            float: right;
+            margin: 40px;
+        }
+    </style>
+
+
+
+
+</head>
+<body>
+    <div id="top">
+        <span class="s1"> 2018年3月22日  星期四</span>
+        <span class="s2">衡阳师范学院欢迎您！</span>
+        <span class="s3">English</span>
+
+
+
+    </div>
+    <div id="head">
+        <div class="headCenter">
+        <img src="images/hynu-logo1.png" />
+        <img src="images/xx3.gif"  class="i2"/>
+             </div>
+    </div>
+    <div id="nav">
+        <a href="" class="a1"> 首页 </a>
+        <a href="">学校概况</a>
+        <a href="">学校机构</a>
+        <a href="">院系设置</a>
+        <a href="">教育教学</a>
+        <a href="">科学研究</a>
+        <a href="">学科建设</a>
+        <a href="">师资队伍</a>
+        <a href="">招生就业</a>
+        <a href="">国际交流</a>
+    </div>
+    <div id="bigImg"></div>
+    <div id="toolBox">
+
+        <div id="search">
+            <input type="text"  placeholder="请输入关键字" id="inp" />
+            <input type="button"   value="搜索"  id="sousuo"/>
+        </div>
+            <div class="line">
+
+            </div>
+        <ul id="title">
+            <li>
+                <span class="pic1"></span>
+                <span class="text">校园新闻网</span>
+            </li>
+            <li>
+                <span class="pic2"></span>
+                <span class="text">信息公开</span>
+            </li>
+            <li>
+                <span class="pic3"></span>
+                <span class="text">阳光服务</span>
+            </li>
+            <li>
+                <span class="pic4"></span>
+                <span class="text">法律援助</span>
+            </li>
+            <li>
+                <span class="pic5"></span>
+                <span class="text">院长书记信</span>
+            </li>
+            <li>
+                <span class="pic6"></span>
+                <span class="text">转型发展</span>
+            </li>
+            <li>
+                <span class="pic7"></span>
+                <span class="text">校友天地</span>
+            </li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="news">
+            <span class="s1">校园新闻</span>
+            <span class="s2">News</span>
+            <a href=""  class="s3"> 更多+</a>
+
+           <div class="jt"></div>
+            <div style="float: left;">
+               <div id="new-l" >
+                     <p style="display:block;position: absolute;right: 10px;bottom: 10px;">
+                        <a style="background: orange;" href="">1</a>
+                         <a  href="">2</a>
+                         <a  href="">3</a>
+                            <a  href="">4</a>
+                            <a  href="">5</a>
+                        <a  href="">6</a>
+                    </p>
+               </div>
+                <div class="bt">
+                <a  href="">我校举行“校友吴锦平师范生师范技能奖学基金”捐赠签约仪式</a>
+             </div>
+            </div>
+            <div id="new-r">
+                <div>
+                    <a href="" style=" display:block;width: 75%;height: 30px;float: left;color:black;">
+                        供需见面会16413个岗位助力毕业生就业</a>
+                    <div  style="float: right;width: 15%;text-align: center;font-size: 18px;height:90px; ">
+                        <p style="height:30px;line-height: 30px;margin-top: 10px;
+                        background: #E6E6E6;border-bottom: 1px solid;">27</p>
+                        <p style="height:30px;line-height: 30px;background: #E6E6E6"> 3月</p>
+                        <p style="height:30px;line-height: 30px;background: #A80000">2018</p>
+
+                    </div>
+                    <p style=" display:block;width: 75%;font-size:14px;color:#A6A6A6;">
+                        3月24日，湖南省湘南地区2018届师范类毕业生供需见面会暨
+                        衡阳师范学院2018届毕业生供需见面会在我校东校区举办。
+                        本次供需见面会共有来自省内外的417个单位参加，
+                        提供招聘岗位16413个，并促成1300余人达成了就业意向。
+                        当天上午，尽管天空不时飘过淅淅... <a href="">[详情]</a></p>
+
+                </div>
+                    <ul>
+                        <li>
+                            <em>1</em>
+                            <a href="">图书馆2018年“数字资源进院系”活动走进外国语学院</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>2</em>
+                            <a href="">省教育厅实验室安全工作现场检查组来我校检查指导工作</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>3</em>
+                            <a href="">我校举行“校友吴锦平师范生师范技能奖学基金”捐赠签约仪式</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>4</em>
+                            <a href="">我校举行2017年度“春华秋实”奖学金颁奖仪式</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>5</em>
+                            <a href="">师生健康中国健康 我校防治结核病主题教育活动如火如荼</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>6</em>
+                            <a href="">学校第四届学科、第八届科研工作会议圆满闭幕</a>
+                            <span>2018-03-27</span>
+                        </li>
+                        <li>
+                            <em>7</em>
+                            <a href="">校工会连续11年荣获湖南省教育工会“先进基层工会”</a>
+                            <span>2018-03-27</span>
+                        </li>
+
+                        
+                    </ul>
+            </div>
+
+        </div>
+        <div id="Tonggao">
+
+            <div id="l">
+                <span class="s1">通知公告</span>
+                <span class="s2">Announcement</span>
+                <a href=""  class="s3"> 更多+</a>
+                <div class="jt"></div>
+                <li style="margin-top: 10px;">
+                    <div style="float: left;width: 43px;height: 40px;" >
+                        <div class="d1">29</div>
+                        <div class="d2">三月</div>
+                    </div>
+                    <div style="float: left;width: 330px;height: 40px;">
+                        <a  href=""  style=" color: #333333;font-size: 14px">
+                        关于2018年“清明节”“劳动节”与“端午节”放假安排的通知
+                    </a>
+                    </div>
+                </li>
+                <li>
+                    <div style="float: left;width: 43px;height: 40px;" >
+                        <div class="d1">26</div>
+                        <div class="d2">三月</div>
+                    </div>
+                    <div style="float: left;width: 330px;height: 40px;">
+                        <a  href="" style="color: #333333;font-size: 14px" >
+                        西校区初教学院鱼塘渗漏维修工程招标公告
+                    </a> </div>
+
+                </li>
+                <li>
+                    <div style="float: left;width: 43px;height: 40px;" >
+                        <div class="d1">26</div>
+                        <div class="d2">三月</div>
+                    </div>
+                    <div style="float: left;width: 330px;height: 40px;">
+                        <a  href="" style="color: #333333;font-size: 14px" >
+                        东校区建筑维修中心板房及屋面制作安装工程招标公告
+                    </a> </div>
+
+                </li>
+                <li>
+                    <div style="float: left;width: 43px;height: 40px;" >
+                        <div class="d1">26</div>
+                        <div class="d2">三月</div>
+                    </div>
+                    <div style="float: left;width: 330px;height: 40px;">
+                        <a  href=""  style="color: #333333;font-size: 14px">
+                        关于选拔2018年国家留学基金湖南省地方合作项目访学人员的通知
+                    </a> </div>
+                </li>
+            </div>
+            <div id="c">
+                <span class="s1">媒体师院</span>
+                <span class="s2">Media</span>
+                <a href=""  class="s3"> 更多+</a>
+                <div class="jt"></div>
+                <li style="margin-top: 10px;">
+                    <div class="dddd">衡阳晚报</div>
+                    <div>
+                        <a href="" style="color: #333333;font-size: 14px">
+                            【衡阳晚报】招聘求贤若渴，待遇“明码标价”</a>
+                    </div>
+                </li>
+
+                <li>
+                    <div  class="dddd">衡阳日报</div>
+                    <div>
+                        <a href="" style="color: #333333;font-size: 14px">
+                            【衡阳日报】招聘求贤若渴，待遇“明码标价”</a>
+                    </div>
+                </li>
+                <li>
+                    <div  class="dddd">掌上衡阳</div>
+                    <div>
+                        <a href="" style="color: #333333;font-size: 14px">
+                            【掌上衡阳】衡阳师院举办毕业生供需见面会，417家单位招贤纳士</a>
+                    </div>
+                </li>
+                <li>
+                    <div  class="dddd">衡阳电视台</div>
+                    <div>
+                        <a href="" style="color: #333333;font-size: 14px">
+                            【衡阳电视台】湘南地区师范生供需见面会 400企业高校纳才 万余岗...</a>
+                    </div>
+                </li>
+
+
+
+            </div>
+            <div id="r">
+                <span class="s1">教学信息 </span>
+                <span class="s1"> 学术信息</span>
+                <span class="s2"> Academic</span>
+                <a href=""  class="s3"> 更多+</a>
+                <div class="jt"></div>
+                <li style="margin-top: 10px;">
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">关于签订我校2017年湖南省教育厅科研项</a>
+                </li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">关于2017年专项资金绩效评价工作的通知</a></li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">关于做好2018年湖南省社会科学成果鉴定</a></li>
+                </li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">关于组织参加衡阳师范学院第四届学科、</a>
+                </li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">转发：湖南省知识产权局关于征集2018年</a>
+                </li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">关于开展2018年度学术活动的通知</a>
+                </li>
+                <li>
+                    <span class="span">2018-03-20 </span>
+                    <a href="" class="a3">转发：关于推荐湖南省社会科学成果评审</a>
+                </li>
+                
+                
+                
+            </div>
+
+
+        </div>
+        <div id="Project">
+            <span class="s1">专题网站</span>
+            <span class="s2">Project site</span>
+            <a href=""  class="s3"> 更多+</a>
+            <div class="jt"></div>
+            <a href="" class="a">
+                <img src="images/bk1.png"/>
+            </a>
+            <a href=""  class="a">
+                <img src="images/bk2.png"/>
+                </a>
+            <a href=""  class="a">
+                <img src="images/bk3.png"/>
+            </a>
+            <a href=""  class="a">
+                <img src="images/bk4.png"/>
+            </a>
+
+        </div>
+        <div id="channel">
+            <span class="s1">快速通道</span>
+            <span class="s2">Quick channel</span>
+            <a href=""  class="s3"> 更多+</a>
+            <div class="jt"></div>
+             <span class="s4">
+                <a href="">行政办公OA</a></span>
+            <span class="s4">
+                <a href="">科技信息系</a></span>
+            <span class="s4">
+                <a href="">教务管理</a></span>
+            <span class="s4">
+                <a href="">课程资源中</a></span>
+            <span class="s4">
+                <a href="">工作电话</a></span>
+            <span class="s4">
+                <a href="">工作周历</a></span>
+            <span class="s4">
+                <a href="">心理咨询</a></span>
+            <span class="s4">
+                <a href="">顶岗实习</a></span>
+            <span class="s4">
+                <a href="">教工邮箱</a></span>
+            <span class="s4">
+                <a href="">财务查询</a></span>
+        </div>
+        <div id="Quick">
+            <span class="s1">快速链接</span>
+            <span class="s2">Quick Links</span>
+            <a href=""  class="s3"> 更多+</a>
+            <div class="jt"></div>
+            <span class="s4">
+                <a href="">中国期刊网</a></span>
+            <span class="s4">
+                <a href="">教育部</a></span>
+            <span class="s4">
+                <a href="">湖南教育政务网</a></span>
+            <span class="s4">
+                <a href="">湖南教育网</a></span>
+            <span class="s4">
+                <a href="">为先在线</a></span>
+            <span class="s4">
+                <a href="">衡阳市政府门户网</a></span>
+            <span class="s4">
+                <a href="">湖南教育网微信</a></span>
+            <span class="s4">
+                <a href="">衡阳师范学院微信</a></span>
+        </div>
+    </div>
+    <div id="foot">
+    <img src="images/tubiao.png" class="img1"/>
+    <div class="p">
+        <p>联系电话：0734-3456789    招生咨询：0734-8486615   联系邮箱： bgs@hynu.edu.cn</p>
+        <p>地址：湖南省衡阳市珠晖区衡花路16号(东校区） 雁峰区黄白路165号（西校区）</p>
+        <p>版权：衡阳师范学院   备案登记：湘教QS3-200505-000049   湘ICP备05003883号</p>
+    </div>
+        <a href="">
+            <img src="images/blue.png." class="img2"/>
+        </a>
+</div>
+</body>
+</html>
